@@ -10,11 +10,10 @@
 
 	<script>
 	window.onload = function(){
-		var map = L.map('map', {
-			center: [30.28,76.61],
-			zoom: 2,
-		});
-		L.tileLayer('http://{s}.tile.cloudmade.com/008c020e60c4426fba424183cd542f23/125441/256/{z}/{x}/{y}.png', {attribution: 'Baltimore Map Trial 1.1',
+		var map = L.map('map').setView([39.28,-76.61],10);
+		L.tileLayer('http://{s}.tile.cloudmade.com/008c020e60c4426fba424183cd542f23/125441/256/{z}/{x}/{y}.png', {
+		attribution: 'Baltimore Map Trial 1.1',
+		maxZoom: 15
 		}).addTo(map)
 	}
 	</script>
