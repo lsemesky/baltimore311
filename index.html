@@ -10,11 +10,15 @@
 
 	<script>
 	window.onload = function(){
-		var map = L.map('map').setView([39.28,-76.61],10);
+		var map = L.map('map').setView([39.28,-76.61],15);
 		L.tileLayer('http://{s}.tile.cloudmade.com/008c020e60c4426fba424183cd542f23/125441/256/{z}/{x}/{y}.png', {
 		attribution: 'Baltimore Map Trial 1.1',
-		maxZoom: 15
-		}).addTo(map)
+		maxZoom: 20
+			}).addTo(map)
+		
+		L.marker([39.28326056920309, -76.59904929010796]).addTo(map)
+    .bindPopup('A pretty CSS3 popup. <br> Easily customizable.')
+    .openPopup();
 	}
 	</script>
 </head>
