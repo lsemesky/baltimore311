@@ -1,0 +1,7 @@
+{ 
+  "locationName": "Baltimore",
+  "stateName": "Md.",
+
+  "dataUrl": "http://data.baltimorecity.gov/browse?category=Geographic",
+  "dataTitle": "OpenBaltimore"
+}
