@@ -19,7 +19,7 @@ var Forestry = L.layerGroup();
 window.onload = function(){
 
 
-	map = L.map('map').setView([39.28,-76.61],15);
+	map = L.map('map').setView([39.28,-76.61],11);
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/{key}/125441/256/{z}/{x}/{y}.png', {
 	key: '008c020e60c4426fba424183cd542f23',
@@ -41,10 +41,10 @@ function setLayers() {
 	//getMarkers(SW_url, SW);
 	var Forest_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location&$where=starts_with(codedescription,'Forestry')";
 	getMarkers(Forest_url, Forestry);
-	var _url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location&$where=starts_with(codedescription,'Forestry')";
-	getMarkers(Forest_url, Forestry);
-var Forest_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location&$where=starts_with(codedescription,'Forestry')";
-	getMarkers(Forest_url, Forestry);
+	var HCD_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location&$where=starts_with(codedescription,'HCD')";
+	getMarkers(HCD_url, Forestry);
+	var TRM_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location&$where=starts_with(codedescription,'TRM')";
+	getMarkers(TRM_url, Forestry);
 }
 
 function getMarkers(url, layer) {

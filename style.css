@@ -1,6 +1,10 @@
 body {
 	margin:0px;
+	color:#FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	
 }
+a{color:#FED976}
 
 
 #sidebar
@@ -21,6 +25,7 @@ body {
 	margin-top:auto;
 	height:100%;
 	background-color:#000;
+	color:#000000;
 }
 
 
@@ -34,6 +39,7 @@ body {
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
+    color: #000000;
     background: white;
     background: rgba(255,255,255,0.8);
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -43,4 +49,16 @@ body {
     margin: 0 0 5px;
     color: #777;
 
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
 }
