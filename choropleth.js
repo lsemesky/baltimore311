@@ -20,9 +20,21 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>Zip Code</h4>' +  (props ?
-        '<b>' + props.ZIPCODE1 + '</b><br />' 
-        : 'Hover over a state');
+	if(props == undefined)
+		return;
+	var div = '<h4>Zip Code</h4>' +  (props ?
+        '<b>' + props.ZIPCODE1 + '</b><br /><br />' +
+        '<h4>Number of Calls</h4>'+
+       '<b>'+ props.num311calls+'</b><br /><br />'+
+        '<h4>Top 10 Calls:</h4>'  
+                : 'Hover over a region');
+   
+   
+    $.each(props.callcategory, function(k,v){
+    	div = div + '<b>' + v[0] + ":</b> " + v[1] + "<br />";
+    })
+    this._div.innerHTML = div;
+
 };
 
 info.addTo(map);
@@ -33,7 +45,20 @@ $.getJSON( "bacizc10.json", function( data ) {
 		var num311;
 		if(zip!= undefined){
 			console.log(zip)
-		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip),codedescription&$where=zip='"+zip+"'&$group=zip", function(zipData){
+			
+			
+			//get first 10 code descriptions for the  zip
+			
+		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=codedescription,count(codedescription)&$where=zip='"+zip+"'&$group=codedescription&$order=count_codedescription desc&$limit=10", function(codeData){
+				
+		val.properties.callcategory=[];
+			$.each(codeData,function(k,v){
+				val.properties.callcategory.push([v.codedescription,v.count_codedescription]);
+			});
+		});
+			
+			
+		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"'&$group=zip", function(zipData){
 				console.log(zipData[0].count_zip);
 				val.properties.num311calls = zipData[0].count_zip;
 				console.log(val.properties.num311calls);
@@ -46,7 +71,7 @@ $.getJSON( "bacizc10.json", function( data ) {
 
 		}
 		else{
-			val.properties.num311calls=11111;
+			val.properties.num311calls=0;
 		}
 				
 			});
