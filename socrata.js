@@ -4,8 +4,8 @@ var url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=location
 
 window.onload = function(){
 var map = L.map('map').setView([39.28,-76.61],15);
-alert('hi');
-L.tileLayer('http://{s}.tile.cloudmade.com/008c020e60c4426fba424183cd542f23/125441/256/{z}/{x}/{y}.png', {
+L.tileLayer('http://{s}.tile.cloudmade.com/{key}/125441/256/{z}/{x}/{y}.png', {
+	key: '008c020e60c4426fba424183cd542f23',
 attribution: 'Baltimore Map Trial 1.1',
 maxZoom: 20
 	}).addTo(map)
