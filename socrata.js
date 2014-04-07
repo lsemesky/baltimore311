@@ -1,4 +1,5 @@
 var token = "nYkGKGozNTZZ4npCsN43ciFpx";
+var base_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token=" + token;
 var location_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=location";
 var description_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription&$group=codedescription&$limit=10";
 var map;
@@ -16,6 +17,18 @@ var FCCS = L.layerGroup();
 var Forestry = L.layerGroup();
 var urls=[];
 
+var currentIcon= new L.Icon.Default();
+var blackIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-black.png'});
+var brownIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-brown.png'});
+var fuschaIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-fuscha.png'});
+var greenIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-green.png'});
+var ochreIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-ochre.png'});
+var pinkIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-pink.png'});
+var purpleIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-purple.png'});
+var redIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-red.png'});
+var tealIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-teal.png'});
+var yellowIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-yellow.png'});
+
 
 window.onload = function(){
 
@@ -32,7 +45,7 @@ window.onload = function(){
 
 	//getMarkers(location_url);
 	generateDescriptions();
-	//setLayers();
+	setLayers("");
 	setCheckBoxes();
 
 }
@@ -40,10 +53,10 @@ window.onload = function(){
 function generateDescriptions(){urls.push("SW - Street Works");	
 urls.push("Forestry - Forestry Services");
 urls.push("HCD - Housing & Community Development");
-urls.push("TRM - Transportation Maintenance");
-urls.push("TRS - Transportation Service");
+urls.push("TRM - Transportation & Roadway Maintenance");
+urls.push("TRS - Transportation & Roadway Service");
 urls.push("WW - Water & Wastewater");
-urls.push("TRT - Transit");
+urls.push("TRT - Transportation & Roadway ");
 urls.push("HLTH - Health");
 urls.push("BCLB - Baltimore City Liquor");
 urls.push("ECC - Roadside Maintenance");
@@ -52,29 +65,31 @@ urls.push("FCCS - Financial Complaints");
 
 function setLayers(string) {
 switch(string){
-case "SW - Street Works": var SW_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'SW')";
-	getMarkers(SW_url, SW); break;
-case "Forestry - Forestry Services":var Forest_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'Forestry')";
-	getMarkers(Forest_url, Forestry); break;
-case "HCD - Housing & Community Development":var HCD_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'HCD')";
-	getMarkers(HCD_url, HCD); break;
-case "TRM - Transportation Maintenance":var TRM_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'TRM')";
-	getMarkers(TRM_url, TRM); break;
-case "TRS - Transportation Service": var TRS_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'TRS')";
-getMarkers(TRS_url, TRS);	break;
-case "WW - Water & Wastewater":var WW_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'WW')";
-	getMarkers(WW_url, WW); break;
-case "TRT - Transit":var TRT_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'TRT')";
-	getMarkers(TRT_url, TRT); break;
-case "HLTH - Health":var HLTH_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'HLTH')";
-	getMarkers(HLTH_url, HLTH); break;
-case "BCLB - Baltimore City Liquor":	var BCLB_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'BCLB')";
-	getMarkers(BCLB_url, BCLB); break;
+case "":
+case "SW - Street Works": var SW_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'SW')";
+currentIcon = new L.Icon.Default();getMarkers(SW_url, SW,currentIcon); 
+case "Forestry - Forestry Services":var Forest_url = base_url + "&$select=codedescription,location,address&$where=starts_with(codedescription,'Forestry')";
+currentIcon = greenIcon;getMarkers(Forest_url, Forestry,currentIcon);
+case "HCD - Housing & Community Development":var HCD_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'HCD')";
+currentIcon = pinkIcon;getMarkers(HCD_url, HCD,currentIcon);
+case "TRM - Transportation & Roadway Maintenance":var TRM_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'TRM')";
+currentIcon = blackIcon;getMarkers(TRM_url, TRM,currentIcon);
+case "TRS - Transportation & Roadway Service": var TRS_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'TRS')";
+currentIcon = fuschaIcon;getMarkers(TRS_url, TRS,currentIcon);	
+case "WW - Water & Wastewater":var WW_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'WW')";
+currentIcon = tealIcon;getMarkers(WW_url, WW,currentIcon);
+case "TRT - Transportation & Roadway ":var TRT_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'TRT')";
+currentIcon = yellowIcon;getMarkers(TRT_url, TRT,currentIcon);
+case "HLTH - Health":var HLTH_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'HLTH')";
+currentIcon = purpleIcon;getMarkers(HLTH_url, HLTH,currentIcon);
+case "BCLB - Baltimore City Liquor":	var BCLB_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'BCLB')";
+currentIcon = redIcon;getMarkers(BCLB_url, BCLB,currentIcon);
 	
-case "ECC - Roadside Maintenance":var ECC_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address&$where=starts_with(codedescription,'ECC')";
-	getMarkers(ECC_url, ECC); break;
-case "FCCS - Financial Complaints":var FCCS_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address,address&$where=starts_with(codedescription,'FCCS')";
-	getMarkers(FCCS_url, FCCS); break;
+case "ECC - Roadside Maintenance":var ECC_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'ECC')";
+currentIcon = brownIcon;	getMarkers(ECC_url, ECC,currentIcon);
+	
+case "FCCS - Financial Complaints":var FCCS_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'FCCS')";
+currentIcon = ochreIcon;getMarkers(FCCS_url, FCCS,currentIcon);
 default: return;
 }
 
@@ -84,31 +99,49 @@ function getLayers(string) {
 	case "SW - Street Works": return SW;
 	case "Forestry - Forestry Services": return Forestry;
 	case "HCD - Housing & Community Development": return HCD;
-	case "TRM - Transportation Maintenance": return TRM;
-	case "TRS - Transportation Service": return TRS;
+	case "TRM - Transportation & Roadway Maintenance": return TRM;
+	case "TRS - Transportation & Roadway Service": return TRS;
 	case "WW - Water & Wastewater": return WW;
-	case "TRT - Transit": return TRT;
+	case "TRT - Transportation & Roadway ": return TRT;
 	case "HLTH - Health": return HLTH;
 	case "BCLB - Baltimore City Liquor":	return BCLB;
-		
 	case "ECC - Roadside Maintenance":return ECC;
 	case "FCCS - Financial Complaints":return FCCS;
-	default: return;
+	default: return false;
 	}
 
 	}
 
-function getMarkers(url, layer) {
-	//if (markers != undefined){map.removeLayer(markers);}
 
+function getMarkers(url, layer,icon) {
+	
+	
 	$.getJSON( url, function( data ) {
 		  var items = [];
 		  $.each( data, function( key, val ) {
-			items.push =  L.marker([val.location.latitude, val.location.longitude]).addTo(layer).bindPopup(val.address+ "<br />" + val.codedescription);
+			  
+			items.push =  L.marker([val.location.latitude, val.location.longitude], {icon: icon}).addTo(layer).bindPopup(val.address+ "<br />" + val.codedescription);
 			//alert(items);
 		  });
-		  map.addLayer(layer);
+		 // map.addLayer(layer);
 		});
+}
+
+function getIconColor(layer){
+	switch(layer){
+	case SW: return tealIcon;
+	case Forestry: return greenIcon;
+	case HCD: return brownIcon; 
+	case TRM: return redIcon;
+	case TRS: return yellowIcon; 
+	case WW: return new L.Icon.Default(); 
+	case TRT: return pinkIcon; 
+	case HLTH: return ochreIcon;
+	case BCLB: return fuschaIcon; 
+	case ECC: return blackIcon; 
+	case FCCS: return purpleIcon; 
+	default: return new L.Icon.Default();
+	}
 }
 
 
@@ -129,13 +162,23 @@ $.each(urls,function(key,val){
 function getCheckBoxes() {
 
 	var c=$("input:checked");
+	var l;
 //	var Redo_url =  "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription,location,address,address";
 	$.each(c,function(key ,val){
-		setLayers(val.value);
+		l = getLayers(val.value);
+		if(!map.hasLayer(l)){
+			map.addLayer(l);
+			
+		}
+		
 		});
 	var u = $("input:checkbox:not(:checked)");
 	$.each(u, function(key,val){
-		map.removeLayer(getLayers(val.value));
+		l = getLayers(val.value);
+		
+		if(map.hasLayer(l)){
+			map.removeLayer(l);
+		}
 	})
 	//getMarkers(Redo_url);
 }

@@ -1,5 +1,5 @@
 var token = "nYkGKGozNTZZ4npCsN43ciFpx";
-var url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=zip,count(zip)&$GROUP=zip";
+var url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$GROUP=zip";
 var geojson;
 var map;
 var info = L.control();
