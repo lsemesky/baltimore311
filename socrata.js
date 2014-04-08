@@ -4,17 +4,27 @@ var location_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select
 var description_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$select=codedescription&$group=codedescription&$limit=10";
 var map;
 
-var SW = L.layerGroup();
-var HCD = L.layerGroup();
-var TRM = L.layerGroup();
-var TRS = L.layerGroup();
-var WW = L.layerGroup();
-var TRT = L.layerGroup();
-var HLTH = L.layerGroup();
-var BCLB = L.layerGroup();
-var ECC = L.layerGroup();
-var FCCS = L.layerGroup();
-var Forestry = L.layerGroup();
+var SW = new L.MarkerClusterGroup({
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<span>' + childCount + '</span>', className: 'marker-cluster-blue', iconSize: new L.Point(40, 40) });
+		}
+});
+var HCD = new L.MarkerClusterGroup();
+var TRM = new L.MarkerClusterGroup();
+var TRS = new L.MarkerClusterGroup();
+var WW = new L.MarkerClusterGroup();
+var TRT = new L.MarkerClusterGroup();
+var HLTH = new L.MarkerClusterGroup();
+var BCLB = new L.MarkerClusterGroup({
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<span>' + childCount + '</span>', className: 'marker-cluster-red', iconSize: new L.Point(40, 40) });
+		}
+});
+var ECC = new L.MarkerClusterGroup();
+var FCCS = new L.MarkerClusterGroup();
+var Forestry = new L.MarkerClusterGroup();
 var urls=[];
 
 var currentIcon= new L.Icon.Default();
@@ -38,7 +48,7 @@ window.onload = function(){
 	L.tileLayer('http://{s}.tile.cloudmade.com/{key}/125441/256/{z}/{x}/{y}.png', {
 	key: '008c020e60c4426fba424183cd542f23',
 	attribution: '311 Service Calls Baltimore',
-	maxZoom: 20
+	maxZoom: 18
 	}).addTo(map)
 
 	
