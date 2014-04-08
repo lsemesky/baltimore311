@@ -5,13 +5,21 @@ var description_url = "https://opendata.socrata.com/resource/2e9u-3gji.json?$sel
 var map;
 
 var SW = new L.MarkerClusterGroup({
+
+		disableClusteringAtZoom: 18,
 	iconCreateFunction: function (cluster) {
 		var childCount = cluster.getChildCount();
 		return new L.DivIcon({ html: '<span>' + childCount + '</span>', className: 'marker-cluster-blue', iconSize: new L.Point(40, 40) });
 		}
 });
-var HCD = new L.MarkerClusterGroup();
-var TRM = new L.MarkerClusterGroup();
+var HCD = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18
+
+});
+var TRM = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18
+
+});
 var TRS = new L.MarkerClusterGroup();
 var WW = new L.MarkerClusterGroup();
 var TRT = new L.MarkerClusterGroup();
@@ -60,7 +68,7 @@ window.onload = function(){
 
 }
 
-function generateDescriptions(){urls.push("SW - Street Works");	
+function generateDescriptions(){urls.push("SW - Sanitation & Waste");	
 urls.push("Forestry - Forestry Services");
 urls.push("HCD - Housing & Community Development");
 urls.push("TRM - Transportation & Roadway Maintenance");
@@ -76,7 +84,7 @@ urls.push("FCCS - Financial Complaints");
 function setLayers(string) {
 switch(string){
 case "":
-case "SW - Street Works": var SW_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'SW')";
+case "SW - Sanitation & Waste": var SW_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'SW')";
 currentIcon = new L.Icon.Default();getMarkers(SW_url, SW,currentIcon); 
 case "Forestry - Forestry Services":var Forest_url = base_url + "&$select=codedescription,location,address&$where=starts_with(codedescription,'Forestry')";
 currentIcon = greenIcon;getMarkers(Forest_url, Forestry,currentIcon);
@@ -106,7 +114,7 @@ default: return;
 }
 function getLayers(string) {
 	switch(string){
-	case "SW - Street Works": return SW;
+	case "SW - Sanitation & Waste": return SW;
 	case "Forestry - Forestry Services": return Forestry;
 	case "HCD - Housing & Community Development": return HCD;
 	case "TRM - Transportation & Roadway Maintenance": return TRM;
@@ -130,9 +138,13 @@ function getMarkers(url, layer,icon) {
 		  var items = [];
 		  $.each( data, function( key, val ) {
 			  
-			items.push =  L.marker([val.location.latitude, val.location.longitude], {icon: icon}).addTo(layer).bindPopup(val.address+ "<br />" + val.codedescription);
-			//alert(items);
-		  });
+			items.push =  L.marker([val.location.latitude, val.location.longitude], {icon: icon}).addTo(layer).bindPopup(val.address+ "<br />" + val.codedescription).on('mouseover', function(evt) {
+				  evt.target.openPopup();
+			 }).on('mouseout', function(evt) {
+			  evt.target.closePopup();
+			});
+		//alert(items);
+	  });
 		 // map.addLayer(layer);
 		});
 }
