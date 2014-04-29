@@ -9,30 +9,80 @@ var SW = new L.MarkerClusterGroup({
 		disableClusteringAtZoom: 18,
 	iconCreateFunction: function (cluster) {
 		var childCount = cluster.getChildCount();
-		return new L.DivIcon({ html: '<span>' + childCount + '</span>', className: 'marker-cluster-blue', iconSize: new L.Point(40, 40) });
-		}
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-blue' , iconSize: new L.Point(40, 40) });	
+	}
 });
 var HCD = new L.MarkerClusterGroup({
-	disableClusteringAtZoom: 18
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-pink' , iconSize: new L.Point(40, 40) });	
+	}
 
 });
 var TRM = new L.MarkerClusterGroup({
-	disableClusteringAtZoom: 18
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-black' , iconSize: new L.Point(40, 40) });	
+	}
 
 });
-var TRS = new L.MarkerClusterGroup();
-var WW = new L.MarkerClusterGroup();
-var TRT = new L.MarkerClusterGroup();
-var HLTH = new L.MarkerClusterGroup();
+var TRS = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-fuscha' , iconSize: new L.Point(40, 40) });	
+	}
+
+});
+var WW = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-teal' , iconSize: new L.Point(40, 40) });	
+	}
+});
+var TRT = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-yellow' , iconSize: new L.Point(40, 40) });	
+	}
+});
+var HLTH = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-purple' , iconSize: new L.Point(40, 40) });	
+	}
+});
 var BCLB = new L.MarkerClusterGroup({
 	iconCreateFunction: function (cluster) {
 		var childCount = cluster.getChildCount();
-		return new L.DivIcon({ html: '<span>' + childCount + '</span>', className: 'marker-cluster-red', iconSize: new L.Point(40, 40) });
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-red', iconSize: new L.Point(40, 40) });
 		}
 });
-var ECC = new L.MarkerClusterGroup();
-var FCCS = new L.MarkerClusterGroup();
-var Forestry = new L.MarkerClusterGroup();
+var ECC = new L.MarkerClusterGroup({
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-brown', iconSize: new L.Point(40, 40) });
+		}
+});
+var FCCS = new L.MarkerClusterGroup({
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-ochre', iconSize: new L.Point(40, 40) });
+		}
+});
+var Forestry = new L.MarkerClusterGroup({
+	disableClusteringAtZoom: 18,
+	iconCreateFunction: function (cluster) {
+		var childCount = cluster.getChildCount();
+		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster marker-cluster-green' , iconSize: new L.Point(40, 40) });	
+	}
+
+});
 var urls=[];
 
 var currentIcon= new L.Icon.Default();
