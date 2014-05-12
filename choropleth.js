@@ -8,11 +8,8 @@ var div;
 
 window.onload = function(){
 	var mapdata; 
-map = L.map('map').setView([39.28,-76.61],11);
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-   key: "008c020e60c4426fba424183cd542f23",
-    styleId: 22677
-}).addTo(map);
+//map = L.map('map').setView([39.28,-76.61],11);
+map=L.mapbox.map('map', 'lsemesky.i7ila685').setView([39.28,-76.61],11);//L.mapbox.tileLayer('lsemesky.i7ilhipd');
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
     this.update();

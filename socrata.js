@@ -101,13 +101,9 @@ var yellowIcon = new L.Icon.Default({iconUrl: 'leaflet/images/marker-icon-yellow
 window.onload = function(){
 
 
-	map = L.map('map').setView([39.28,-76.61],11);
+	map=L.mapbox.map('map', 'lsemesky.i7ila685').setView([39.28,-76.61],11);
 
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-	key: '008c020e60c4426fba424183cd542f23',
-	attribution: '311 Service Calls Baltimore',
-	maxZoom: 18
-	}).addTo(map)
+	
 
 	
 
