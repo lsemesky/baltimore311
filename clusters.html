@@ -9,19 +9,23 @@
 		<script src="leaflet/MarkerCluster.QuickHull.js"></script>
 		<script src="leaflet/MarkerCluster.Spiderfier.js"></script>
 		<script src="leaflet/DistanceGrid.js"></script>
-
-
-
-
 		<script src="jquery-1.11.0.min.js"></script>
-		<script src="socrata.js"></script>
+		<script src="clusters.js"></script>
+		<script src="dist/html5shiv.js"></script>
 	</head>
-
 	<body>
 
   		<div id="sidebar">
-  			<a href="choropleth.html">Choropleth Map</a>
-  			<div id="Pie Chart"></div>
+  			<div id = "navigation">
+				<ul>
+					<li><a href="choropleth.html" class="button">Choropleth Map</a></li>
+					<li><a href="clusters.html" class="button">Cluster Map</a></li>
+				</ul>
+  			</div>
+  			<div id="filters">
+  				<h3>Filter Clusters by Problem Type: </h3>
+
+  			</div>
 
   		</div>
 		<div id="map"></div>

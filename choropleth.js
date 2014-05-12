@@ -7,7 +7,7 @@ var div;
 
 
 window.onload = function(){
-	var mapdata; 
+	var mapdata;
 //map = L.map('map').setView([39.28,-76.61],11);
 map=L.mapbox.map('map', 'lsemesky.i7ila685').setView([39.28,-76.61],11);//L.mapbox.tileLayer('lsemesky.i7ilhipd');
 info.onAdd = function (map) {
@@ -20,17 +20,17 @@ info.onAdd = function (map) {
 info.update = function (props) {document.getElementById("piechart").innerHTML="";
 		document.getElementById("piekey").innerHTML="";
 	if(props == undefined){
-		
+
 		return;
 	}
 	div = '<h4>Zip Code</h4>' +  (props ?
         '<b>' + props.ZIPCODE1 + '</b><br /><br />' +
         '<h4>Number of Calls</h4>'+
        '<b>'+ props.num311calls+'</b><br /><br />'+
-        '<h4>Top 10 Calls:</h4>'  
+        '<h4>Top 10 Calls:</h4>'
                 : 'Hover over a region');
-   
-   
+
+
     $.each(props.callcategory, function(k,v){
     	div = div + '<b>' + v[0] + ":</b> " + v[1] + "<br />";
     })
@@ -71,19 +71,19 @@ $.getJSON( "bacizc10.json", function( data ) {
 		var num311;
 		if(zip!= undefined){
 			console.log(zip)
-			
-			
+
+
 			//get first 10 code descriptions for the  zip
-			
+
 		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=codedescription,count(codedescription)&$where=zip='"+zip+"'&$group=codedescription&$order=count_codedescription desc&$limit=10", function(codeData){
-				
+
 		val.properties.callcategory=[];
 			$.each(codeData,function(k,v){
 				val.properties.callcategory.push([v.codedescription,v.count_codedescription]);
 			});
 		});
-			
-			
+
+
 		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"'&$group=zip", function(zipData){
 				console.log(zipData[0].count_zip);
 				val.properties.num311calls = zipData[0].count_zip;
@@ -97,37 +97,37 @@ $.getJSON( "bacizc10.json", function( data ) {
 				}).addTo(map);
 
 			});
-		
+
 	/*	$.getJSON("http://api.zippopotam.us/us/md/baltimore",function(labelData){
 			$.each(labelData.places,function(lkey,lval){
-				
+
 				var label = new L.Label()
 			label.setContent(lval["post_code"]);
 			label.setLatLng(new L.LatLng(lval.latitude, lval.longitude));
 			map.showLabel(label);
 			});
-			
+
 		});*/
 
 		}
 		else{
 			val.properties.num311calls=0;
 		}
-				
+
 			});
-		
-		
-			
-	
-	
-	
+
+
+
+
+
+
 	});
 
 
 }
-function style(feature) {   
+function style(feature) {
 	console.log("style function: " + feature.properties.num311calls);
-	
+
     return {
         fillColor: getColor(feature.properties.num311calls),
         weight: 1,
@@ -152,7 +152,7 @@ function highlightFeature(e) {
         layer.bringToFront();
     }
     info.update(layer.feature.properties);
-    
+
 }
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
@@ -163,7 +163,7 @@ function zoomToFeature(e) {
 }
 
 function onEachFeature(feature, layer) {
-	
+
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
@@ -175,7 +175,7 @@ function onEachFeature(feature, layer) {
 
 
 function getColor(d) {
-	
+
     return d > 600 ? '#800026' :
            d > 500  ? '#BD0026' :
            d > 400  ? '#E31A1C' :
@@ -193,7 +193,7 @@ function doPieChart(data){
 	    h = 280,                            //height
 	    r = 100,                            //radius
 	    color = ['#800026','#BD0026','#E31A1C','#FC4E2A','#FD8D3C','#FEB24C','#FED976','#FFEDA0','#FFFFCC','#FFFFEE'];     //builtin range of colors
-	    
+
 	    var vis = d3.select("#piechart")
 	        .append("svg:svg")              //create the SVG element inside the <body>
 	        .data([data])                   //associate our data with the document
@@ -201,23 +201,23 @@ function doPieChart(data){
 	            .attr("height", h)
 	        .append("svg:g")                //make a group to hold our pie chart
 	            .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
-	 
+
 	    var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
 	        .outerRadius(r);
-	 
+
 	    var pie = d3.layout.pie()           //this will create arc data for us given a list of values
 	        .value(function(d) { return d[1]; });    //we must tell it out to access the value of each element in our data array
-	 
+
 	    var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-	        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
+	        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
 	        .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
 	            .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
 	                .attr("class", "slice");    //allow us to style things in the slices (like text)
-	 
+
 	        arcs.append("svg:path")
 	                .attr("fill", function(d, i) { return color[i]; } ) //set the color for each slice to be chosen from the color function defined above
 	                .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
-	 
+
 	        var piekey = document.getElementById("piekey");
 	        for (var i = 0; i < data.length; i++) {
 	            piekey.innerHTML +=
@@ -225,8 +225,8 @@ function doPieChart(data){
 	                data[i][0] + '<br>';
 	        }
 
-	        
-	        
+
+
 	        arcs.append("svg:text")                                     //add a label to each slice
 	                .attr("transform", function(d) {                    //set the label's origin to the center of the arc
 	                //we have to make sure to set these before calling arc.centroid
@@ -236,5 +236,5 @@ function doPieChart(data){
 	            })
 	            .attr("text-anchor", "middle")                          //center the text on it's origin
 	            .text(function(d, i) { return data[i][1]; });        //get the label from our original data array
-	        
+
 }

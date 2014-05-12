@@ -1,16 +1,29 @@
 <html>
 	<head>
-			<link rel="stylesheet" type="text/css" href="style.css" />
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-	<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
-	<script src="jquery-1.11.0.min.js"></script>
-
-	<script src="d3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+		<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+		<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+		<script src="jquery-1.11.0.min.js"></script>
+		<script src="d3.min.js"></script>
 		<script src="choropleth.js"></script>
-	</head><body>
-		<div id="sidebar"><a href="opendatatest.html">Call Data Map</a><br /><br /><div id="piechart"></div><div id="piekey" class="legend"></div></div>
-			<div id="map"></div>
+	</head>
+
+	<body>
+		<div id="sidebar">
+			<div id = "navigation">
+				<ul>
+					<li><a href="choropleth.html" class="button">Choropleth Map</a></li>
+					<li><a href="clusters.html" class="button">Cluster Map</a></li>
+				</ul>
+  			</div>
+
+			<br /><br />
+			<div id="piechart"></div>
+			<div id="piekey" class="legend"></div>
+		</div>
+
+		<div id="map"></div>
 	</body>
 </html>
