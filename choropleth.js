@@ -9,7 +9,7 @@ var div;
 window.onload = function(){
 	var mapdata; 
 map = L.map('map').setView([39.28,-76.61],11);
-L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
    key: "008c020e60c4426fba424183cd542f23",
     styleId: 22677
 }).addTo(map);
