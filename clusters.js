@@ -120,7 +120,7 @@ window.onload = function(){
 
 function generateDescriptions(){
 	urls.push("Sanitation & Waste");
-	urls.push("Forestry - Forestry Services");
+	urls.push("Forestry Services");
 	urls.push("Housing & Community Development");
 	urls.push("Transportation & Roadway Maintenance");
 	urls.push("Transportation & Roadway Service");
@@ -154,10 +154,10 @@ currentIcon = purpleIcon;getMarkers(HLTH_url, HLTH,currentIcon);
 case "Baltimore City Liquor":	var BCLB_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'BCLB')";
 currentIcon = redIcon;getMarkers(BCLB_url, BCLB,currentIcon);
 
-case "ECC - Roadside Maintenance":var ECC_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'ECC')";
+case "Roadside Maintenance":var ECC_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'ECC')";
 currentIcon = brownIcon;	getMarkers(ECC_url, ECC,currentIcon);
 
-case "FCCS - Financial Complaints":var FCCS_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'FCCS')";
+case "Financial Complaints":var FCCS_url = base_url +"&$select=codedescription,location,address&$where=starts_with(codedescription,'FCCS')";
 currentIcon = ochreIcon;getMarkers(FCCS_url, FCCS,currentIcon);
 default: return;
 }
@@ -165,17 +165,17 @@ default: return;
 }
 function getLayers(string) {
 	switch(string){
-	case "SW - Sanitation & Waste": return SW;
-	case "Forestry - Forestry Services": return Forestry;
-	case "HCD - Housing & Community Development": return HCD;
-	case "TRM - Transportation & Roadway Maintenance": return TRM;
-	case "TRS - Transportation & Roadway Service": return TRS;
-	case "WW - Water & Wastewater": return WW;
-	case "TRT - Transportation & Roadway ": return TRT;
-	case "HLTH - Health": return HLTH;
-	case "BCLB - Baltimore City Liquor":	return BCLB;
-	case "ECC - Roadside Maintenance":return ECC;
-	case "FCCS - Financial Complaints":return FCCS;
+	case "Sanitation & Waste": return SW;
+	case "Forestry Services": return Forestry;
+	case "Housing & Community Development": return HCD;
+	case "Transportation & Roadway Maintenance": return TRM;
+	case "Transportation & Roadway Service": return TRS;
+	case "Water & Wastewater": return WW;
+	case "Transportation & Roadway ": return TRT;
+	case "Health": return HLTH;
+	case "Baltimore City Liquor":	return BCLB;
+	case "Roadside Maintenance":return ECC;
+	case "Financial Complaints":return FCCS;
 	default: return false;
 	}
 
@@ -229,7 +229,7 @@ $.each(urls,function(key,val){
 		  $("<div/>", {
 			"id": "CheckList",
 			 html: items.join( "" )
-		  }).appendTo("#sidebar");
+		  }).appendTo("#filters");
 }
 
 function getCheckBoxes() {
