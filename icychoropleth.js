@@ -84,7 +84,7 @@ $.getJSON( "bacizc10.json", function( data ) {
 		});
 			
 			
-		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"' AND starts_with(code,'WW')&$group=zip,code", function(zipData){
+		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"' AND code='ICYCONDI'&$group=zip,code", function(zipData){
 				console.log(zipData[0].count_zip);
 				val.properties.num311calls = zipData[0].count_zip;
 				console.log(val.properties.num311calls);
