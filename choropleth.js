@@ -47,7 +47,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1, 5, 10, 20, 30,40,50, 60],
+        grades = [0, 10, 50, 100, 200, 300,400,500, 600],
         labels = [];
 
     // loop through our density intervals and generate a label with a colored square for each interval
@@ -84,7 +84,7 @@ $.getJSON( "bacizc10.json", function( data ) {
 		});
 			
 			
-		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"' AND starts_with(code,'WW')&$group=zip,code", function(zipData){
+		$.getJSON("https://opendata.socrata.com/resource/2e9u-3gji.json?$$app_token="+token+"&$select=zip,count(zip)&$where=zip='"+zip+"'&$group=zip", function(zipData){
 				console.log(zipData[0].count_zip);
 				val.properties.num311calls = zipData[0].count_zip;
 				console.log(val.properties.num311calls);
@@ -176,14 +176,14 @@ function onEachFeature(feature, layer) {
 
 function getColor(d) {
 	
-    return d > 60 ? '#800026' :
-           d > 50  ? '#BD0026' :
-           d > 40  ? '#E31A1C' :
-           d > 30  ? '#FC4E2A' :
-           d > 20   ? '#FD8D3C' :
-           d > 10   ? '#FEB24C' :
-           d > 5   ? '#FED976' :
-           d > 1   ? '#FFEDA0':
+    return d > 600 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 400  ? '#E31A1C' :
+           d > 300  ? '#FC4E2A' :
+           d > 200   ? '#FD8D3C' :
+           d > 100   ? '#FEB24C' :
+           d > 50   ? '#FED976' :
+           d > 10   ? '#FFEDA0':
                       '#FFFFCC';
 }
 
