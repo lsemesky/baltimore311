@@ -24,20 +24,25 @@ a {
 	color:#FFF;
 }
 
-#filters
+#piechart
 {
-    position:absolute;
-    left:5%;
-    top:30%;
-    background-color:#000;
-    color:#FFF;
+    position:relative;
+    top:10%;
+    left:7%;
+}
+
+
+#piekey
+{
+    position:block;
+    bottom:5%;
+    left:10%;
 }
 
 #navigation
 {
     position:absolute;
     left:1%;
-    bottom:0px;
     top:0px;
     background-color:#000;
     color:#CCC;
@@ -106,6 +111,7 @@ a {
     background-color: #76A6FC;
     border-radius: 4px;
 }
+
 
 .button {
     display: inline;
