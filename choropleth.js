@@ -189,9 +189,10 @@ function getColor(d) {
 
 function doPieChart(data){
 	//alert(data);
-	 var w = 300,                        //width
-	    h = 280,                            //height
-	    r = 100,                            //radius
+	var osw = document.getElementById('piechart').offsetWidth;
+	 var w = osw,                        //width
+	    h = osw,                            //height
+	    r = osw/2-10,                            //radius
 	    color = ['#800026','#BD0026','#E31A1C','#FC4E2A','#FD8D3C','#FEB24C','#FED976','#FFEDA0','#FFFFCC','#FFFFEE'];     //builtin range of colors
 	    
 	    var vis = d3.select("#piechart")
