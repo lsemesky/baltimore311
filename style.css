@@ -15,8 +15,8 @@ a {
 
 #sidebar
 {
-             position:absolute;
-    	left:0px;
+    position:absolute;
+	left:0px;
 	bottom:0px;
 	top:0px;
 	width:25%;
@@ -26,7 +26,7 @@ a {
 
 #piechart
 {
-width:75%;
+    width:75%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -40,7 +40,6 @@ width:75%;
 
 #navigation
 {
-
     background-color:#000;
     color:#CCC;
 }
@@ -49,13 +48,14 @@ width:75%;
     display: inline;
 }
 
+
 #map {
 	display:block;
 	margin-left:25%;
 	margin-right:auto;
-	margin-top:auto;
+	margin-top:0%;
 	height:100%;
-	background-color:#000;
+	background-color:gray;
 	color:#000000;
 }
 
